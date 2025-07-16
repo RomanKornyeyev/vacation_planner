@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<style>
+    /* estilos en línea, juzgadme */
+    .animate-bounce {
+        animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(8px);
+        }
+        60% {
+            transform: translateY(4px);
+        }
+    }
+</style>
+<div class="landing-page">
+
+    {# SECCIÓN 1: HERO #}
+    <section class="d-flex flex-column justify-content-center align-items-center text-center py-5" style="min-height: 83vh;">
+        <div class="container">
+            <h1 class="display-3 fw-bold mb-3">Organiza tus viajes fácilmente.</h1>
+            <p class="lead mb-4">Crea, gestiona y comparte tus itinerarios en segundos.</p>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <a href="{{ path('app_index') }}" class="btn btn-primary btn-lg">Ir a mis viajes</a>
+            {% else %}
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg">Iniciar sesión</a>
+                    <a href="{{ path('app_register') }}" class="btn btn-outline-primary btn-lg">Registrarse</a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="mt-5 d-flex flex-column justify-content-center">
+            <i class="fa-solid fa-chevron-down fa-2x animate-bounce"></i>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
